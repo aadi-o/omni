@@ -45,9 +45,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </nav>
 
           <div className="hidden md:flex items-center gap-4">
-            <button className="px-5 py-2.5 bg-slate-900 text-white text-xs font-black uppercase rounded-lg hover:bg-slate-800 transition-colors tracking-widest">
+            <Link to="/" className="px-5 py-2.5 bg-slate-900 text-white text-xs font-black uppercase rounded-lg hover:bg-slate-800 transition-colors tracking-widest">
               Get Started
-            </button>
+            </Link>
           </div>
 
           <button 
@@ -85,7 +85,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {children}
       </main>
 
-      <footer className="border-t bg-white py-12">
+      <footer className="border-t bg-white py-16">
         <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="col-span-1 md:col-span-2">
              <div className="flex items-center gap-3 mb-6">
@@ -94,32 +94,32 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </div>
                 <span className="font-black text-xl text-slate-900">OmniToolAI</span>
              </div>
-             <p className="text-slate-500 max-w-sm mb-6">
+             <p className="text-slate-500 max-w-sm mb-6 font-medium leading-relaxed">
                 The world's first fully browser-based studio combining heavy-duty PDF processing 
-                with generative AI. No accounts, no tracking, just tools.
+                with generative AI. No accounts, no tracking, just performance.
              </p>
           </div>
           <div>
-            <h4 className="font-black text-xs uppercase tracking-widest mb-6">Tools</h4>
-            <ul className="space-y-4 text-sm text-slate-500 font-medium">
-              <li><Link to="/pdf" className="hover:text-indigo-600">All PDF Tools</Link></li>
-              <li><Link to="/pdf/ocr" className="hover:text-indigo-600">OCR Scanned PDF</Link></li>
-              <li><Link to="/pdf/merge" className="hover:text-indigo-600">Merge PDF</Link></li>
-              <li><Link to="/cv-analyzer" className="hover:text-indigo-600">Resume Review</Link></li>
+            <h4 className="font-black text-[10px] uppercase tracking-[0.2em] mb-8 text-slate-400">Tools</h4>
+            <ul className="space-y-4 text-sm text-slate-600 font-bold">
+              <li><Link to="/pdf" className="hover:text-indigo-600 transition-colors">All PDF Tools</Link></li>
+              <li><Link to="/pdf/ocr" className="hover:text-indigo-600 transition-colors">OCR Scanned PDF</Link></li>
+              <li><Link to="/code-writer" className="hover:text-indigo-600 transition-colors">Dev Studio</Link></li>
+              <li><Link to="/cv-analyzer" className="hover:text-indigo-600 transition-colors">Resume Review</Link></li>
             </ul>
           </div>
           <div>
-            <h4 className="font-black text-xs uppercase tracking-widest mb-6">Legal</h4>
-            <ul className="space-y-4 text-sm text-slate-500 font-medium">
-              <li><a href="#" className="hover:text-indigo-600">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-indigo-600">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-indigo-600">Cookies</a></li>
+            <h4 className="font-black text-[10px] uppercase tracking-[0.2em] mb-8 text-slate-400">Legal</h4>
+            <ul className="space-y-4 text-sm text-slate-600 font-bold">
+              <li><Link to="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="hover:text-indigo-600 transition-colors">Terms of Service</Link></li>
+              <li><Link to="/cookies" className="hover:text-indigo-600 transition-colors">Cookie Policy</Link></li>
             </ul>
           </div>
         </div>
-        <div className="container mx-auto px-6 mt-12 pt-12 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-slate-400 text-xs font-bold uppercase tracking-widest">
-            © 2024 OmniTool AI Studio. All rights reserved.
+        <div className="container mx-auto px-6 mt-16 pt-12 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em]">
+            © 2024 OmniTool AI Studio. Local Processing Engine v1.0.
           </div>
         </div>
       </footer>

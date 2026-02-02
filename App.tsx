@@ -7,6 +7,9 @@ import PdfTool from './pages/PdfTool';
 import PdfGallery from './pages/PdfGallery';
 import AITool from './pages/AITool';
 import CVAnalyzer from './pages/CVAnalyzer';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+import Cookies from './pages/Cookies';
 
 const App: React.FC = () => {
   return (
@@ -20,6 +23,9 @@ const App: React.FC = () => {
           <Route path="/hashtags" element={<AITool type="hashtags" />} />
           <Route path="/code-writer" element={<AITool type="code" />} />
           <Route path="/cv-analyzer" element={<CVAnalyzer />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/cookies" element={<Cookies />} />
         </Routes>
       </Layout>
     </Router>
