@@ -1,0 +1,7 @@
+{
+  "name": "omnitool",
+  "description": "A premium, all-in-one platform for AI-powered content generation, professional coding assistance, CV analysis, and high-performance PDF utility tools.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
