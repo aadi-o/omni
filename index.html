@@ -9,49 +9,63 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
       :root {
-        --animation-duration: 0.6s;
+        --animation-duration: 0.8s;
         --animation-timing: cubic-bezier(0.16, 1, 0.3, 1);
       }
       body {
         font-family: 'Plus Jakarta Sans', sans-serif;
         overflow-x: hidden;
       }
-      .markdown-content h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
-      .markdown-content h2 { font-size: 1.25rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-      .markdown-content p { margin-bottom: 1rem; line-height: 1.6; }
-      .markdown-content ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
-      .markdown-content li { margin-bottom: 0.5rem; }
-
-      /* Smooth Animations */
+      
+      /* Staggered Animations */
       @keyframes slideUpFade {
-        from { opacity: 0; transform: translateY(20px); }
+        from { opacity: 0; transform: translateY(30px); }
         to { opacity: 1; transform: translateY(0); }
       }
-      @keyframes scaleIn {
-        from { opacity: 0; transform: scale(0.95); }
-        to { opacity: 1; transform: scale(1); }
-      }
-      .animate-slide-up {
+      
+      .animate-reveal {
         animation: slideUpFade var(--animation-duration) var(--animation-timing) both;
       }
-      .animate-scale-in {
-        animation: scaleIn var(--animation-duration) var(--animation-timing) both;
-      }
+      
       .stagger-1 { animation-delay: 0.1s; }
-      .stagger-2 { animation-delay: 0.2s; }
-      .stagger-3 { animation-delay: 0.3s; }
-      .stagger-4 { animation-delay: 0.4s; }
+      .stagger-2 { animation-delay: 0.15s; }
+      .stagger-3 { animation-delay: 0.2s; }
+      .stagger-4 { animation-delay: 0.25s; }
+      .stagger-5 { animation-delay: 0.3s; }
 
-      /* Glassmorphism Refinement */
-      .glass {
-        background: rgba(255, 255, 255, 0.7);
+      /* Premium Components */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .glass-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08);
+        border-color: #4f46e5;
       }
 
-      /* Custom scrollbar for premium feel */
-      ::-webkit-scrollbar { width: 8px; }
-      ::-webkit-scrollbar-track { background: #f1f5f9; }
+      .btn-primary {
+        background: #0f172a;
+        color: white;
+        transition: all 0.3s var(--animation-timing);
+      }
+      
+      .btn-primary:hover {
+        background: #1e293b;
+        transform: scale(1.02);
+      }
+
+      /* Markdown Overrides */
+      .markdown-content h1 { font-size: 1.875rem; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; }
+      .markdown-content h2 { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-top: 2rem; margin-bottom: 1rem; }
+      .markdown-content p { color: #475569; line-height: 1.8; margin-bottom: 1.25rem; }
+      .markdown-content code { background: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 0.375rem; font-family: monospace; font-size: 0.9em; }
+
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
       ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
       ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
@@ -73,7 +87,7 @@
 }
 </script>
 </head>
-  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-indigo-100 selection:text-indigo-900">
+  <body class="bg-[#fdfdfe] text-slate-900 antialiased selection:bg-indigo-100 selection:text-indigo-900">
     <div id="root"></div>
   </body>
 </html>
