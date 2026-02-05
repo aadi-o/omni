@@ -4,17 +4,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OmniTool Studio | Vol. 1 - The Creative Engine</title>
+    <title>OmniTool Studio | Vol. 01 - The Creative Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
       :root {
         --paper: #FAF9F6;
-        --ink: #111111;
+        --ink: #0A0A0A;
         --cyan: #a5f3fc;
         --magenta: #fbcfe8;
         --yellow: #fef08a;
         --blue: #60a5fa;
+        --red: #ef4444;
       }
       
       body {
@@ -22,8 +23,8 @@
         background-color: var(--paper);
         color: var(--ink);
         background-image: 
-          radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
-        background-size: 20px 20px;
+          radial-gradient(rgba(0,0,0,0.08) 1.5px, transparent 1.5px);
+        background-size: 30px 30px;
         overflow-x: hidden;
       }
 
@@ -36,128 +37,123 @@
         font-family: 'Playfair Display', serif;
       }
 
-      /* Comic Panel Styling */
+      /* Advanced Comic Panel Styling */
       .panel-ink {
         background: white;
-        border: 3px solid var(--ink);
-        box-shadow: 6px 6px 0px var(--ink);
+        border: 4px solid var(--ink);
+        box-shadow: 8px 8px 0px var(--ink);
         position: relative;
         overflow: hidden;
-        transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.4);
       }
 
       .panel-ink:hover {
-        transform: translate(-3px, -3px);
-        box-shadow: 12px 12px 0px var(--ink);
+        transform: translate(-4px, -4px) scale(1.01);
+        box-shadow: 16px 16px 0px var(--ink);
+        z-index: 10;
       }
 
-      .panel-ink::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-image: radial-gradient(rgba(0,0,0,0.1) 1px, transparent 0);
-        background-size: 6px 6px;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-      }
-
-      .panel-ink:hover::after {
-        opacity: 0.15;
-      }
-
-      /* Halftone Texture Overlay */
-      .halftone {
-        position: relative;
-      }
-      .halftone::before {
+      .panel-ink::before {
         content: "";
         position: absolute;
         inset: 0;
         background-image: radial-gradient(var(--ink) 1px, transparent 0);
-        background-size: 4px 4px;
+        background-size: 8px 8px;
         opacity: 0.03;
         pointer-events: none;
       }
 
+      .panel-ink:hover::before {
+        opacity: 0.08;
+      }
+
+      /* Dramatic Action Lines */
+      .action-lines {
+        background: repeating-conic-gradient(from 0deg, #00000005 0deg 15deg, transparent 15deg 30deg);
+      }
+
       /* Animations */
-      @keyframes panel-in {
-        0% { opacity: 0; transform: scale(0.9) rotate(-2deg); }
-        100% { opacity: 1; transform: scale(1) rotate(0); }
+      @keyframes slide-in-bottom {
+        0% { transform: translateY(40px) rotate(2deg); opacity: 0; }
+        100% { transform: translateY(0) rotate(0); opacity: 1; }
       }
 
-      @keyframes draw-line {
-        0% { width: 0; }
-        100% { width: 100%; }
+      @keyframes slide-in-left {
+        0% { transform: translateX(-40px) skewX(-10deg); opacity: 0; }
+        100% { transform: translateX(0) skewX(0); opacity: 1; }
       }
 
-      @keyframes pop-text {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.1) rotate(5deg); color: var(--blue); }
+      @keyframes pop-bounce {
+        0% { transform: scale(0.9); }
+        50% { transform: scale(1.05); }
         100% { transform: scale(1); }
       }
 
-      .animate-panel { animation: panel-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
-      .hover-pop:hover { animation: pop-text 0.4s ease-in-out; }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+
+      .animate-bottom { animation: slide-in-bottom 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+      .animate-left { animation: slide-in-left 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+      .animate-pop { animation: pop-bounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
+      .animate-float { animation: float 3s ease-in-out infinite; }
 
       .stagger-1 { animation-delay: 0.1s; }
       .stagger-2 { animation-delay: 0.2s; }
       .stagger-3 { animation-delay: 0.3s; }
       .stagger-4 { animation-delay: 0.4s; }
 
-      /* Custom Buttons */
-      .btn-comic {
-        background: var(--ink);
-        color: white;
-        padding: 1rem 2rem;
+      /* Comic Onomatopoeia */
+      .onomatopoeia {
         font-family: 'Bangers', cursive;
-        font-size: 1.5rem;
-        border: 3px solid var(--ink);
-        box-shadow: 4px 4px 0px var(--cyan);
-        transition: all 0.1s;
+        position: absolute;
+        background: var(--yellow);
+        border: 3px solid #000;
+        padding: 4px 12px;
+        transform: rotate(-10deg);
+        z-index: 20;
+        box-shadow: 4px 4px 0px #000;
+        pointer-events: none;
+        font-size: 1.25rem;
         text-transform: uppercase;
       }
 
-      .btn-comic:hover {
-        transform: translate(-2px, -2px);
-        box-shadow: 8px 8px 0px var(--magenta);
+      /* Utility */
+      .halftone-overlay {
+        mask-image: radial-gradient(circle, black 50%, transparent 100%);
+        mask-size: 4px 4px;
       }
 
-      .btn-comic:active {
-        transform: translate(4px, 4px);
+      .btn-burst {
+        background: var(--ink);
+        color: white;
+        font-family: 'Bangers', cursive;
+        font-size: 1.5rem;
+        padding: 1rem 3rem;
+        border: 4px solid var(--ink);
+        box-shadow: 6px 6px 0px var(--cyan);
+        transition: all 0.2s;
+        text-transform: uppercase;
+      }
+
+      .btn-burst:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 12px 12px 0px var(--magenta);
+      }
+
+      .btn-burst:active {
+        transform: translate(6px, 6px);
         box-shadow: 0px 0px 0px var(--ink);
       }
 
-      /* Rough Edge Border (Simulated) */
-      .rough-border {
-        border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Cpath d='M0 0 L10 0 L10 10 L0 10 Z' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") 30 stretch;
-      }
-
-      .speech-bubble {
-        position: relative;
-        background: #fff;
-        border: 3px solid #000;
-        padding: 20px;
-        border-radius: 30px;
-      }
-      .speech-bubble:after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border: 20px solid transparent;
-        border-top-color: #000;
-        border-bottom: 0;
-        border-left: 0;
-        margin-left: -10px;
-        margin-bottom: -20px;
-      }
-
-      ::-webkit-scrollbar { width: 12px; }
+      ::-webkit-scrollbar { width: 14px; }
       ::-webkit-scrollbar-track { background: var(--paper); }
-      ::-webkit-scrollbar-thumb { background: var(--ink); border: 4px solid var(--paper); border-radius: 10px; }
+      ::-webkit-scrollbar-thumb { 
+        background: var(--ink); 
+        border: 4px solid var(--paper); 
+        border-radius: 20px;
+      }
     </style>
   <script type="importmap">
 {
@@ -177,7 +173,7 @@
 }
 </script>
 </head>
-  <body class="antialiased selection:bg-yellow-200 selection:text-black halftone">
+  <body class="antialiased selection:bg-yellow-200 selection:text-black">
     <div id="root"></div>
     <script type="module" src="index.tsx"></script>
   </body>
