@@ -1,7 +1,7 @@
 
 import React, { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, FileText, Video, Hash, Code, Briefcase, Menu, X, Sparkles } from 'lucide-react';
+import { LayoutDashboard, FileText, Code, Briefcase, Menu, X, Sparkles, BookOpen, Zap } from 'lucide-react';
 
 interface LayoutProps {
   children: ReactNode;
@@ -12,114 +12,137 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
 
   const navItems = [
-    { name: 'Dashboard', path: '/', icon: LayoutDashboard },
-    { name: 'PDF Tools', path: '/pdf', icon: FileText },
-    { name: 'AI Generation', path: '/video-gen', icon: Sparkles },
-    { name: 'Dev Studio', path: '/code-writer', icon: Code },
-    { name: 'Career', path: '/cv-analyzer', icon: Briefcase },
+    { name: 'THE DESK', path: '/', icon: LayoutDashboard },
+    { name: 'ARCHIVE', path: '/pdf', icon: FileText },
+    { name: 'STORY', path: '/video-gen', icon: Sparkles },
+    { name: 'BLUEPRINT', path: '/code-writer', icon: Code },
+    { name: 'REVIEW', path: '/cv-analyzer', icon: Briefcase },
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 selection:bg-indigo-100 selection:text-indigo-900">
-      <header className="sticky top-0 z-50 w-full border-b bg-white/70 backdrop-blur-xl">
-        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-200">
-              <Sparkles className="text-white w-6 h-6" />
+    <div className="min-h-screen flex flex-col">
+      {/* Dynamic Masthead */}
+      <header className="sticky top-0 z-50 w-full border-b-[6px] border-black bg-white">
+        <div className="container mx-auto px-6 h-28 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-4 group">
+            <div className="w-14 h-14 bg-black text-white flex items-center justify-center border-4 border-black group-hover:-rotate-12 transition-transform shadow-[4px_4px_0px_#60a5fa]">
+              <Zap className="w-8 h-8 fill-yellow-400 text-yellow-400" />
             </div>
-            <span className="font-black text-2xl tracking-tight text-slate-900">OmniTool<span className="text-indigo-600">AI</span></span>
+            <div className="flex flex-col -space-y-2">
+              <span className="font-comic text-4xl tracking-tight uppercase leading-none">
+                OMNI<span className="text-blue-600">TOOL</span>
+              </span>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 ml-1">
+                VOL. 01 / ISSUE #2024
+              </span>
+            </div>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-2">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-sm font-bold tracking-tight uppercase transition-all hover:text-indigo-600 ${
-                  location.pathname === item.path || (item.path === '/pdf' && location.pathname.startsWith('/pdf')) ? 'text-indigo-600 underline underline-offset-8 decoration-2' : 'text-slate-500'
+                className={`px-4 py-2 text-xs font-black uppercase tracking-widest transition-all rounded-lg flex items-center gap-2 ${
+                  location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path)) 
+                  ? 'bg-black text-white shadow-[4px_4px_0px_#fbcfe8]' 
+                  : 'text-slate-500 hover:text-black hover:bg-slate-50'
                 }`}
               >
+                <item.icon className="w-4 h-4" />
                 {item.name}
               </Link>
             ))}
           </nav>
 
-          <div className="hidden md:flex items-center gap-4">
-            <Link to="/" className="px-5 py-2.5 bg-slate-900 text-white text-xs font-black uppercase rounded-lg hover:bg-slate-800 transition-colors tracking-widest">
-              Get Started
-            </Link>
+          <div className="hidden md:flex items-center gap-6">
+            <div className="text-right hidden xl:block">
+              <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">CURRENT STATUS</div>
+              <div className="text-xs font-black uppercase text-emerald-600 flex items-center justify-end gap-1">
+                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" /> ALL ENGINES GO!
+              </div>
+            </div>
+            <div className="w-px h-10 bg-black/10 mx-2" />
+            <div className="w-12 h-12 bg-yellow-200 border-2 border-black flex items-center justify-center shadow-[3px_3px_0px_black] hover:rotate-6 transition-transform cursor-help">
+               <span className="font-comic text-xl">?</span>
+            </div>
           </div>
 
-          <button 
-            className="md:hidden p-2 text-slate-600"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X /> : <Menu />}
+          <button className="lg:hidden p-3 bg-slate-100 border-2 border-black" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </header>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-40 bg-white pt-24 animate-in fade-in zoom-in-95">
-          <nav className="flex flex-col p-6 gap-6">
+        <div className="lg:hidden fixed inset-0 z-40 bg-white pt-32 p-8 border-b-[6px] border-black">
+          <nav className="flex flex-col gap-6">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 hover:bg-indigo-50 text-slate-900 font-bold transition-colors"
+                className="font-comic text-5xl uppercase tracking-tighter border-b-4 border-black pb-6 flex justify-between items-center hover:text-blue-600 transition-colors"
               >
-                <div className="flex items-center gap-4">
-                  <item.icon className="w-6 h-6 text-indigo-600" />
-                  {item.name}
-                </div>
-                <X className="w-4 h-4 text-slate-300" />
+                {item.name}
+                <item.icon className="w-10 h-10" />
               </Link>
             ))}
           </nav>
         </div>
       )}
 
-      <main className="flex-1 container mx-auto px-6 py-12">
+      <main className="flex-1">
         {children}
       </main>
 
-      <footer className="border-t bg-white py-16">
-        <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
-          <div className="col-span-1 md:col-span-2">
-             <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                  <Sparkles className="text-white w-5 h-5" />
+      <footer className="border-t-[6px] border-black bg-white py-24 mt-32 relative overflow-hidden">
+        <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 relative z-10">
+          <div className="lg:col-span-6">
+             <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-12 bg-black text-white flex items-center justify-center border-2 border-black">
+                  <Sparkles className="w-6 h-6 text-yellow-400" />
                 </div>
-                <span className="font-black text-xl text-slate-900">OmniToolAI</span>
+                <span className="font-comic text-4xl tracking-tighter uppercase italic">OmniTool Studio</span>
              </div>
-             <p className="text-slate-500 max-w-sm mb-6 font-medium leading-relaxed">
-                The world's first fully browser-based studio combining heavy-duty PDF processing 
-                with generative AI. No accounts, no tracking, just performance.
+             <p className="text-slate-600 max-w-lg font-medium text-lg leading-relaxed italic">
+                A browser-native utility workspace for the modern storyteller. 
+                Everything stays on the page. No data ever leaves your session. 
+                Designed for speed, privacy, and impact.
              </p>
           </div>
-          <div>
-            <h4 className="font-black text-[10px] uppercase tracking-[0.2em] mb-8 text-slate-400">Tools</h4>
-            <ul className="space-y-4 text-sm text-slate-600 font-bold">
-              <li><Link to="/pdf" className="hover:text-indigo-600 transition-colors">All PDF Tools</Link></li>
-              <li><Link to="/pdf/ocr" className="hover:text-indigo-600 transition-colors">OCR Scanned PDF</Link></li>
-              <li><Link to="/code-writer" className="hover:text-indigo-600 transition-colors">Dev Studio</Link></li>
-              <li><Link to="/cv-analyzer" className="hover:text-indigo-600 transition-colors">Resume Review</Link></li>
+          
+          <div className="lg:col-span-3">
+            <h4 className="font-comic text-2xl uppercase tracking-widest mb-10 text-slate-400">Chapters</h4>
+            <ul className="space-y-5 text-sm font-black uppercase tracking-[0.2em]">
+              <li><Link to="/pdf" className="hover:text-blue-600 flex items-center gap-2 group"><div className="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-150 transition-all"/> The Archive</Link></li>
+              <li><Link to="/pdf/ocr" className="hover:text-blue-600 flex items-center gap-2 group"><div className="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-150 transition-all"/> Transcription</Link></li>
+              <li><Link to="/video-gen" className="hover:text-blue-600 flex items-center gap-2 group"><div className="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-150 transition-all"/> Storyboards</Link></li>
+              <li><Link to="/code-writer" className="hover:text-blue-600 flex items-center gap-2 group"><div className="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-150 transition-all"/> Logic Drafting</Link></li>
             </ul>
           </div>
-          <div>
-            <h4 className="font-black text-[10px] uppercase tracking-[0.2em] mb-8 text-slate-400">Legal</h4>
-            <ul className="space-y-4 text-sm text-slate-600 font-bold">
-              <li><Link to="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="hover:text-indigo-600 transition-colors">Terms of Service</Link></li>
-              <li><Link to="/cookies" className="hover:text-indigo-600 transition-colors">Cookie Policy</Link></li>
+
+          <div className="lg:col-span-3">
+            <h4 className="font-comic text-2xl uppercase tracking-widest mb-10 text-slate-400">The Ledger</h4>
+            <ul className="space-y-5 text-sm font-black uppercase tracking-[0.2em]">
+              <li><Link to="/privacy" className="hover:text-blue-600 flex items-center gap-2 group"><div className="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-150 transition-all"/> Privacy Core</Link></li>
+              <li><Link to="/terms" className="hover:text-blue-600 flex items-center gap-2 group"><div className="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-150 transition-all"/> Usage Terms</Link></li>
+              <li><Link to="/cookies" className="hover:text-blue-600 flex items-center gap-2 group"><div className="w-1.5 h-1.5 bg-black rounded-full group-hover:scale-150 transition-all"/> Data Policy</Link></li>
             </ul>
           </div>
         </div>
-        <div className="container mx-auto px-6 mt-16 pt-12 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em]">
-            © 2024 OmniTool AI Studio. Local Processing Engine v1.0.
+
+        <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-400/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-400/5 rounded-full blur-[120px] pointer-events-none" />
+        
+        <div className="container mx-auto px-6 mt-24 pt-12 border-t-4 border-black flex flex-col md:flex-row justify-between items-center">
+          <div className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500">
+            © 2024 OMNITOOL STUDIO | BUILT WITH INK & CODE
+          </div>
+          <div className="mt-8 md:mt-0 flex gap-1">
+             {[1, 2, 3, 4, 5].map(i => (
+               <div key={i} className={`w-2 h-8 border-2 border-black ${i % 2 === 0 ? 'bg-black' : 'bg-white'}`} />
+             ))}
           </div>
         </div>
       </footer>
